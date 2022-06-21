@@ -1,10 +1,13 @@
 @charset "UTF-8";
 
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
+  font-family: 'Press Start 2P', cursive;
 }
 
 .game {
@@ -17,6 +20,59 @@
 
   position: relative;
   overflow: hidden;
+}
+
+.gameImgElements {
+  display: none;
+  user-select: none;
+}
+
+.start {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  
+  width: 100%;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+}
+
+.start #mario-logo {
+  display: inherit;
+  width: 300px;
+}
+
+.start #startBtn {
+  border: 5px solid #000;
+  border-radius: 50px 50px;
+  background-image: linear-gradient(to right, #FF2929, #D12121, #B01C1C);
+  font-size: 3rem;
+  text-align: center;
+  padding: 10px 20px;
+
+  display: inherit;
+  cursor: pointer;
+  position: relative;
+  transition: .3s ease;
+}
+
+.start h2 {
+  display: inherit;
+  color: #fff;
+  font-size: 20px;
+  text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+#startBtn:hover {
+  transform: scale(1.1);
+  background-image: linear-gradient(to right, #f13737, #ff0000);
 }
 
 .pipe-obstacle {

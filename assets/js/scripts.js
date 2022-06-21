@@ -1,13 +1,50 @@
-const mario = document.querySelector('.super-mario');
-const pipe = document.querySelector('.pipe-obstacle');
+let startMsg = document.getElementsByClassName('start')[0];
+let startButton = document.getElementById('startBtn');
+let imgsGame = document.getElementsByClassName('gameImgElements');
 
-const jump = () => {
-  mario.classList.add('jump-mario');
+startButton.addEventListener('dblclick', () => {
+  for (let i = 0; i < imgsGame.length; i++) {
+    imgsGame[i] = imgsGame[i].style.display = 'block';
+  }
+  imgsGame[0].classList.add('clouds');
+  imgsGame[1].classList.add('super-mario');
+  imgsGame[2].classList.add('pipe-obstacle');
+  startMsg.style.display = 'none';
+  executeGame();
+});
 
-  setTimeout(() => {
-    mario.classList.remove('jump-mario');
-  }, 500);
+function executeGame() {
+  const mario = document.querySelector('.super-mario');
+  const pipe = document.querySelector('.pipe-obstacle');
+
+  const jump = () => {
+    mario.classList.add('jump-mario');
+  
+    setTimeout(() => {
+      mario.classList.remove('jump-mario');
+    }, 500);
+  }
+  
+  const loopGame = setInterval(() => {
+    const pipePosition = pipe.offsetLeft;
+    const marioPosition = window.getComputedStyle(mario)
+    .bottom.replace('px', '');
+  
+    if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
+      pipe.style.animation = 'none';
+      pipe.style.left = `${pipePosition}px`;
+  
+      mario.style.animation = 'none';
+      mario.style.bottom = `${marioPosition}px`;
+  
+      mario.src = './assets/images/mario-game-over.png';
+      mario.style.width = '75px';
+      mario.style.marginLeft = '45px';
+  
+      clearInterval(loopGame);
+    }
+  }, 10);
+  
+  document.body.addEventListener('keydown', jump);
+  document.body.addEventListener('click', jump);
 }
-
-document.body.addEventListener('keydown', jump);
-document.body.addEventListener('click', jump);
